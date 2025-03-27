@@ -4,10 +4,10 @@
   "version": "0.1.0",
   "identifier": "com.wavekata.app",
   "build": {
-    "beforeDevCommand": "npm run dev",
+    "beforeDevCommand": "npm run dev --workspace=src-web",
     "devUrl": "http://localhost:1420",
-    "beforeBuildCommand": "npm run build",
-    "frontendDist": "../dist"
+    "beforeBuildCommand": "npm run build --workspace=src-web",
+    "frontendDist": "../src-web/dist"
   },
   "app": {
     "windows": [

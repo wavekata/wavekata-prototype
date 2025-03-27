@@ -1,0 +1,36 @@
+name: Lint Javascript
+on: [ pull_request ]
+jobs:
+  javascript-lint:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Filter
+        uses: dorny/paths-filter@v3
+        id: filter
+        with:
+          filters: |
+            javascript:
+              - 'src-web/*.js'
+              - 'src-web/*.ts'
+              - 'src-web/*.json'
+              - 'src-web/*.vue'
+              - 'src-web/*.css'
+              - 'src-web/*.scss'
+              - 'src-web/package.json'
+              - 'src-web/package-lock.json'
+              - 'package.json'
+              - 'package-lock.json'
+              - '.github/workflows/javascript-lint.yml'
+      - name: Use Node.js
+        if: steps.filter.outputs.javascript == 'true'
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22.x'
+      - name: Install Node.js dependencies
+        run: npm install
+      - name: ESLint.js check
+        if: steps.filter.outputs.javascript == 'true'
+        run: |
+          npm run lint --workspace=src-web

@@ -1,6 +1,5 @@
 import pluginVue from 'eslint-plugin-vue'
 import vueTsEslintConfig from '@vue/eslint-config-typescript'
-import pluginVitest from '@vitest/eslint-plugin'
 import eslintConfigPrettier from '@vue/eslint-config-prettier'
 
 export default [
@@ -17,9 +16,5 @@ export default [
   ...pluginVue.configs['flat/strongly-recommended'],
   ...vueTsEslintConfig(),
 
-  {
-    ...pluginVitest.configs.recommended,
-    files: ['src/**/__tests__/*']
-  },
   eslintConfigPrettier
 ]
